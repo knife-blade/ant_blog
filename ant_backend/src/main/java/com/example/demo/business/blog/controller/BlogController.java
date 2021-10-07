@@ -1,0 +1,90 @@
+package com.example.demo.business.blog.controller;
+
+import cn.hutool.core.bean.BeanUtil;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.example.demo.business.blog.entity.Blog;
+import com.example.demo.business.blog.service.BlogService;
+import com.example.demo.common.entity.Result;
+import com.example.demo.common.util.auth.ShiroUtil;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.Assert;
+import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDateTime;
+import java.util.Arrays;
+
+@RestController
+@RequestMapping("blog")
+public class BlogController {
+
+    @Autowired
+    BlogService blogService;
+
+    @RequiresAuthentication
+    @PostMapping("/add")
+
+    public Result add(@RequestBody Blog blog) {
+        Assert.hasLength(blog.getTitle(), "标题不能为空");
+        Assert.hasLength(blog.getDescription(), "摘要不能为空");
+        Assert.hasLength(blog.getContent(), "内容不能为空");
+
+        Blog temp = new Blog();
+        temp.setUserId(Long.parseLong(ShiroUtil.getProfile().getId()));
+        temp.setUpdateTime(LocalDateTime.now());
+        temp.setStatus(0);
+
+        BeanUtil.copyProperties(blog, temp, "id", "userId", "updateTime", "status");
+        blogService.save(temp);
+
+        return new Result();
+    }
+
+    @RequiresAuthentication
+    @PostMapping("/delete")
+    public Result delete(@RequestParam Long[] ids) {
+        blogService.removeByIds(Arrays.asList(ids));
+        return new Result();
+    }
+
+    @RequiresAuthentication
+    @PostMapping("/edit")
+    public Result edit(@RequestBody Blog blog) {
+        Assert.isTrue(blog.getId() != null, "id不能为空");
+        Assert.hasLength(blog.getTitle(), "标题不能为空");
+        Assert.hasLength(blog.getDescription(), "摘要不能为空");
+        Assert.hasLength(blog.getContent(), "内容不能为空");
+
+        Blog temp = blogService.getById(blog.getId());
+
+        // 只能编辑自己的文章
+        System.out.println(ShiroUtil.getProfile().getId());
+        Assert.isTrue(temp.getUserId().longValue()
+                == Long.parseLong(ShiroUtil.getProfile().getId()), "没有权限编辑");
+
+        BeanUtil.copyProperties(blog, temp, "id", "userId", "updateTime", "status");
+        blogService.updateById(temp);
+
+        return new Result();
+    }
+
+    @GetMapping("/page")
+    public Result<IPage<Blog>> list(@RequestParam(defaultValue = "1") Integer current) {
+        Page<Blog> page = new Page<Blog>(current, 5);
+        IPage<Blog> pageData = blogService.lambdaQuery()
+                .orderByDesc(Blog::getCreateTime)
+                .page(page);
+
+        return new Result<IPage<Blog>>().data(pageData);
+    }
+
+    @GetMapping("/getThis")
+    public Result<Blog> detail(@RequestParam Long id) {
+        Blog blog = blogService.getById(id);
+        Assert.notNull(blog, "该博客已被删除");
+
+        return new Result<Blog>().data(blog);
+    }
+
+}
