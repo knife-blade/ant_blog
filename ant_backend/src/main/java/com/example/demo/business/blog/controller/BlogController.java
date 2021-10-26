@@ -7,6 +7,8 @@ import com.example.demo.business.blog.entity.Blog;
 import com.example.demo.business.blog.service.BlogService;
 import com.example.demo.common.entity.Result;
 import com.example.demo.common.util.auth.ShiroUtil;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 
+@Api(tags = "博客")
 @RestController
 @RequestMapping("blog")
 public class BlogController {
@@ -22,9 +25,9 @@ public class BlogController {
     @Autowired
     BlogService blogService;
 
+    @ApiOperation("创建博客")
     @RequiresAuthentication
     @PostMapping("/add")
-
     public Result add(@RequestBody Blog blog) {
         Assert.hasLength(blog.getTitle(), "标题不能为空");
         Assert.hasLength(blog.getDescription(), "摘要不能为空");
@@ -41,13 +44,7 @@ public class BlogController {
         return new Result();
     }
 
-    @RequiresAuthentication
-    @PostMapping("/delete")
-    public Result delete(@RequestParam Long[] ids) {
-        blogService.removeByIds(Arrays.asList(ids));
-        return new Result();
-    }
-
+    @ApiOperation("编辑博客")
     @RequiresAuthentication
     @PostMapping("/edit")
     public Result edit(@RequestBody Blog blog) {
@@ -69,6 +66,7 @@ public class BlogController {
         return new Result();
     }
 
+    @ApiOperation("博客列表")
     @GetMapping("/page")
     public Result<IPage<Blog>> list(@RequestParam(defaultValue = "1") Integer current) {
         Page<Blog> page = new Page<Blog>(current, 5);
@@ -79,6 +77,7 @@ public class BlogController {
         return new Result<IPage<Blog>>().data(pageData);
     }
 
+    @ApiOperation("查看博客")
     @GetMapping("/getThis")
     public Result<Blog> detail(@RequestParam Long id) {
         Blog blog = blogService.getById(id);
@@ -87,4 +86,11 @@ public class BlogController {
         return new Result<Blog>().data(blog);
     }
 
+    @ApiOperation("删除博客")
+    @RequiresAuthentication
+    @PostMapping("/delete")
+    public Result delete(@RequestParam Long[] ids) {
+        blogService.removeByIds(Arrays.asList(ids));
+        return new Result();
+    }
 }

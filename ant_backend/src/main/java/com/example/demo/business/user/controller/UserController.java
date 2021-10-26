@@ -7,6 +7,8 @@ import com.example.demo.common.constant.AuthConstant;
 import com.example.demo.common.entity.Result;
 import com.example.demo.common.exception.BusinessException;
 import com.example.demo.common.util.auth.JwtUtil;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.crypto.hash.SimpleHash;
@@ -19,12 +21,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
 
+@Api(tags = "用户")
 @RestController
 public class UserController {
     @Autowired
     private UserService userService;
 
     // 默认账号密码：knife 222333
+    @ApiOperation("登录")
     @PostMapping("/login")
     public Result<UserVO> login(@RequestBody User user, HttpServletResponse response) {
         Assert.hasLength(user.getUserName(), "用户名不能为空");
@@ -55,6 +59,7 @@ public class UserController {
         return new Result<UserVO>().success().data(userVO);
     }
 
+    @ApiOperation("退出登录")
     @RequiresAuthentication
     @GetMapping("/logout")
     public Result logout() {
