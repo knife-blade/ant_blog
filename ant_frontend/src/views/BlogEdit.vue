@@ -30,6 +30,7 @@
 
 <script>
 import Header from "../components/Header";
+
 export default {
   name: "BlogEdit.vue",
   components: {Header},
@@ -43,14 +44,14 @@ export default {
       },
       rules: {
         title: [
-          { required: true, message: '请输入标题', trigger: 'blur' },
-          { min: 3, max: 25, message: '长度在 3 到 25 个字符', trigger: 'blur' }
+          {required: true, message: '请输入标题', trigger: 'blur'},
+          {min: 3, max: 25, message: '长度在 3 到 25 个字符', trigger: 'blur'}
         ],
         description: [
-          { required: true, message: '请输入摘要', trigger: 'blur' }
+          {required: true, message: '请输入摘要', trigger: 'blur'}
         ],
         content: [
-          { trequired: true, message: '请输入内容', trigger: 'blur' }
+          {trequired: true, message: '请输入内容', trigger: 'blur'}
         ]
       },
       operation: "add"
@@ -61,19 +62,17 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           const _this = this
-          this.$axios.post('/blog/' + this.operation, this.ruleForm, {
-            headers: {
-              "Authorization": localStorage.getItem("token")
-            }
-          }).then(res => {
-            console.log(res)
-            _this.$alert('操作成功', '提示', {
-              confirmButtonText: '确定',
-              callback: action => {
-                _this.$router.push("/blogs")
-              }
-            });
-          })
+          this.$axios
+              .post('/blog/' + this.operation, this.ruleForm)
+              .then(res => {
+                console.log(res)
+                _this.$alert('操作成功', '提示', {
+                  confirmButtonText: '确定',
+                  callback: action => {
+                    _this.$router.push("/blogs")
+                  }
+                });
+              })
         } else {
           console.log('error submit!!');
           return false;

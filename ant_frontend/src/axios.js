@@ -5,11 +5,13 @@ import store from './store'
 
 // axios.defaults.baseURL = "http://localhost:8081"
 
-
 // 请求拦截
-axios.interceptors.request.use(request => {
-    // 可以统一设置请求头
-    return request
+axios.interceptors.request.use(config => {
+    // 统一设置请求参数
+    if (store.state.token) {
+        config.headers['Authorization'] = store.state.token
+    }
+    return config;
 })
 
 // 响应拦截

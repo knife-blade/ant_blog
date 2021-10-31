@@ -39,18 +39,16 @@ export default {
   methods: {
     logout() {
       const _this = this
-      _this.$axios.get("/logout", {
-        headers: {
-          "Authorization": localStorage.getItem("token")
-        }
-      }).then(res => {
-        _this.$store.commit("REMOVE_INFO")
-        _this.$router.push("/login")
-      })
+      _this.$axios
+          .post("/logout")
+          .then(res => {
+            _this.$store.commit("REMOVE_INFO")
+            _this.$router.push("/login")
+          })
     }
   },
   created() {
-    if(this.$store.getters.getUser !== null
+    if (this.$store.getters.getUser !== null
         && this.$store.getters.getUser.userName !== null) {
       this.user.userName = this.$store.getters.getUser.userName
       this.user.avatarUrl = this.$store.getters.getUser.avatarUrl
@@ -66,6 +64,7 @@ export default {
   margin: 0 auto;
   text-align: center;
 }
+
 .maction {
   margin: 10px 0;
 }

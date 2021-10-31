@@ -3,7 +3,7 @@
 
     <el-container>
       <el-header>
-        <img class="mlogo" src="https://www.markerhub.com/dist/images/logo/markerhub-logo.png" alt="">
+        <img class="logo" src="https://www.markerhub.com/dist/images/logo/markerhub-logo.png" alt="">
       </el-header>
       <el-main>
         <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
@@ -53,7 +53,7 @@ export default {
           const _this = this
           this.$axios.post('/login', this.ruleForm).then(res => {
             console.log(res.data)
-            const jwt = res.headers['authorization']
+            const jwt = res.headers['Authorization']
             const userInfo = res.data.data
             // 把数据共享出去
             _this.$store.commit("SET_TOKEN", jwt)
@@ -104,7 +104,7 @@ body > .el-container {
 .el-container:nth-child(7) .el-aside {
   line-height: 320px;
 }
-.mlogo {
+.logo {
   height: 60%;
   margin-top: 10px;
 }
