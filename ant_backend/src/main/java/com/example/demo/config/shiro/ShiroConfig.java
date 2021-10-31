@@ -5,6 +5,8 @@ import com.example.demo.config.shiro.filter.JwtFilter;
 import com.example.demo.config.shiro.realm.AccountRealm;
 import org.apache.shiro.mgt.DefaultSessionStorageEvaluator;
 import org.apache.shiro.mgt.DefaultSubjectDAO;
+import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.spring.web.config.DefaultShiroFilterChainDefinition;
 import org.apache.shiro.spring.web.config.ShiroFilterChainDefinition;
 import org.apache.shiro.web.filter.authc.AuthenticatingFilter;
@@ -13,6 +15,9 @@ import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreato
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.servlet.Filter;
+import java.util.Map;
+
 @Configuration
 public class ShiroConfig {
     @Bean
@@ -20,21 +25,45 @@ public class ShiroConfig {
         DefaultShiroFilterChainDefinition chainDefinition = new DefaultShiroFilterChainDefinition();
 
         chainDefinition.addPathDefinition("/login", "anon");
-        chainDefinition.addPathDefinition("/blogs", "anon");
+        chainDefinition.addPathDefinition("/blog/page", "anon");
+        chainDefinition.addPathDefinition("/blog/getThis", "anon");
 
         WhiteList.ALL.forEach(str -> {
             chainDefinition.addPathDefinition(str, "anon");
         });
 
         // all other paths require a logged in user
-        chainDefinition.addPathDefinition("/**", "authc");
+        chainDefinition.addPathDefinition("/**", "jwt");
         return chainDefinition;
     }
 
-    // 名字必须是authc，用以替代shiro默认的authc。
-    @Bean("authc")
-    public AuthenticatingFilter authenticatingFilter() {
-        return new JwtFilter();
+    // 这样是不行的，会导致标记了anon的路径也会走到JwtFilter。
+    // 也就是说：不能将自定义的filter注册成bean。
+    // @Bean("authc")
+    // public AuthenticatingFilter authenticatingFilter() {
+    //     return new JwtFilter();
+    // }
+
+    /**
+     * 设置过滤器，将自定义的Filter加入
+     */
+    @Bean("shiroFilterFactoryBean")
+    public ShiroFilterFactoryBean shiroFilterFactoryBean(SecurityManager securityManager) {
+        ShiroFilterFactoryBean factoryBean = new ShiroFilterFactoryBean();
+        // 登录的地址
+        factoryBean.setLoginUrl("/login");
+        // 登录成功后要跳转的地址
+        // factoryBean.setSuccessUrl("/index");
+        // 未授权地址
+        // factoryBean.setUnauthorizedUrl("/unauthorized");
+
+        factoryBean.setSecurityManager(securityManager);
+        Map<String, Filter> filterMap = factoryBean.getFilters();
+        filterMap.put("jwt", new JwtFilter());
+        factoryBean.setFilters(filterMap);
+        factoryBean.setFilterChainDefinitionMap(shiroFilterChainDefinition().getFilterChainMap());
+
+        return factoryBean;
     }
 
     @Bean
