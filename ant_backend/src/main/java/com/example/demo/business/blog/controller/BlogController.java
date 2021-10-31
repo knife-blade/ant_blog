@@ -28,7 +28,7 @@ public class BlogController {
     @ApiOperation("创建博客")
     @RequiresAuthentication
     @PostMapping("/add")
-    public Result add(@RequestBody Blog blog) {
+    public Result<Blog> add(@RequestBody Blog blog) {
         Assert.hasLength(blog.getTitle(), "标题不能为空");
         Assert.hasLength(blog.getDescription(), "摘要不能为空");
         Assert.hasLength(blog.getContent(), "内容不能为空");
@@ -38,16 +38,15 @@ public class BlogController {
         temp.setUpdateTime(LocalDateTime.now());
         temp.setStatus(0);
 
-        BeanUtil.copyProperties(blog, temp, "id", "userId", "updateTime", "status");
         blogService.save(temp);
 
-        return new Result();
+        return new Result<Blog>().data(temp);
     }
 
     @ApiOperation("编辑博客")
     @RequiresAuthentication
     @PostMapping("/edit")
-    public Result edit(@RequestBody Blog blog) {
+    public Result<Blog> edit(@RequestBody Blog blog) {
         Assert.isTrue(blog.getId() != null, "id不能为空");
         Assert.hasLength(blog.getTitle(), "标题不能为空");
         Assert.hasLength(blog.getDescription(), "摘要不能为空");
@@ -57,13 +56,12 @@ public class BlogController {
 
         // 只能编辑自己的文章
         System.out.println(ShiroUtil.getProfile().getId());
-        Assert.isTrue(temp.getUserId().longValue()
-                == Long.parseLong(ShiroUtil.getProfile().getId()), "没有权限编辑");
+        Assert.isTrue(temp.getUserId().equals(Long.parseLong(ShiroUtil.getProfile().getId())), "没有权限编辑");
 
         BeanUtil.copyProperties(blog, temp, "id", "userId", "updateTime", "status");
         blogService.updateById(temp);
 
-        return new Result();
+        return new Result<Blog>().data(temp);
     }
 
     @ApiOperation("博客列表")
@@ -90,7 +88,7 @@ public class BlogController {
     @RequiresAuthentication
     @PostMapping("/delete")
     public Result delete(@RequestParam Long[] ids) {
-        blogService.removeByIds(Arrays.asList(ids));
+        blogService.deleteBlog(Arrays.asList(ids));
         return new Result();
     }
 }

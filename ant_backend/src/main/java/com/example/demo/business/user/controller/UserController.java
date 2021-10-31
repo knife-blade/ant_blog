@@ -61,7 +61,7 @@ public class UserController {
 
     @ApiOperation("退出登录")
     @RequiresAuthentication
-    @GetMapping("/logout")
+    @PostMapping("/logout")
     public Result logout() {
         SecurityUtils.getSubject().logout();
         return new Result();
