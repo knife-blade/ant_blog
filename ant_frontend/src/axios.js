@@ -25,6 +25,7 @@ axios.interceptors.response.use(response => {
     },
     error => {
         console.log(error)
+        Element.Message.error('失败：' + error.response.data.message);
         if (error.response.data) {
             error.message = error.response.data.msg
         }
