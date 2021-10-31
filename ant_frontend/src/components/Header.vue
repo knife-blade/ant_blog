@@ -1,6 +1,6 @@
 <template>
   <div class="m-content">
-    <h3>欢迎来到MarkerHub的博客</h3>
+    <h3>欢迎来到蚂蚁博客</h3>
     <div class="block">
       <el-avatar :size="50" :src="user.avatarUrl"></el-avatar>
       <div>{{ user.userName }}</div>
