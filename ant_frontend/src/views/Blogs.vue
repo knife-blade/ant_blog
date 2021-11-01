@@ -45,7 +45,7 @@ export default {
       blogs: {},
       current: 1,
       total: 0,
-      size: 5
+      size: 10
     }
   },
   methods: {
