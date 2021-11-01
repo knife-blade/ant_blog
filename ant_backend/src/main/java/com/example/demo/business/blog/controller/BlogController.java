@@ -64,10 +64,9 @@ public class BlogController {
         return new Result<Blog>().data(temp);
     }
 
-    @ApiOperation("博客列表")
+    @ApiOperation("博客分页")
     @GetMapping("/page")
-    public Result<IPage<Blog>> list(@RequestParam(defaultValue = "1") Integer current) {
-        Page<Blog> page = new Page<Blog>(current, 5);
+    public Result<IPage<Blog>> list(Page<Blog> page) {
         IPage<Blog> pageData = blogService.lambdaQuery()
                 .orderByDesc(Blog::getCreateTime)
                 .page(page);
