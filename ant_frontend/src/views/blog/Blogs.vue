@@ -25,6 +25,9 @@
         <span class="date">{{ blog.createTime }}</span>
         <span class="operations">
           <el-button @click="deleteBlog(blog.id)" size="mini">
+            编辑
+          </el-button>
+          <el-button @click="deleteBlog(blog.id)" size="mini">
             删除
           </el-button>
         </span>
@@ -86,6 +89,7 @@ export default {
           confirmButtonText: '确定',
           callback: action => {
             _this.$router.push("/blogs")
+            _this.$router.push()
           }
         });
       })

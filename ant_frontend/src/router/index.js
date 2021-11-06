@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import Login from '../views/Login.vue'
 import BlogDetail from '../views/blog/BlogDetail.vue'
 import BlogEdit from '../views/blog/BlogEdit.vue'
-import Blogs from "@/views/blog/BlogList";
+import Blogs from "@/views/blog/Blogs";
 
 Vue.use(VueRouter)
 
@@ -25,7 +25,7 @@ const routes = [
     path: '/blogs',
     name: 'Blogs',
     // 懒加载
-    component: () => import('../views/blog/BlogList.vue'),
+    component: () => import('../views/blog/Blogs.vue'),
     meta: {
       notRequireAuth: true
     }
