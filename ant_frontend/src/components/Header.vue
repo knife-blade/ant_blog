@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import BlogEdit from "@/views/BlogEdit";
+import BlogEdit from "@/views/blog/BlogEdit";
 
 export default {
   name: "Header",

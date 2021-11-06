@@ -2,23 +2,35 @@
   <div class="blog-container">
     <Header></Header>
 
-    <div class="block">
-      <el-timeline>
+    <div class="article-list">
+      <!--<el-timeline>-->
+      <!--  <el-timeline-item v-for="blog in blogs" :timestamp="blog.createTime" placement="top" :key="blog.id">-->
+      <!--    <el-card>-->
+      <!--      <h4>-->
+      <!--        <router-link :to="{name: 'BlogDetail', params: {blogId: blog.id}}">-->
+      <!--          {{ blog.title }}-->
+      <!--        </router-link>-->
+      <!--      </h4>-->
+      <!--      <p>{{ blog.description }}</p>-->
+      <!--    </el-card>-->
+      <!--    <button @click="deleteBlog(blog.id)">-->
+      <!--      删除-->
+      <!--    </button>-->
+      <!--  </el-timeline-item>-->
+      <!--</el-timeline>-->
 
-        <el-timeline-item v-for="blog in blogs" :timestamp="blog.createTime" placement="top" :key="blog.id">
-          <el-card>
-            <h4>
-              <router-link :to="{name: 'BlogDetail', params: {blogId: blog.id}}">
-                {{ blog.title }}
-              </router-link>
-            </h4>
-            <p>{{ blog.description }}</p>
-          </el-card>
-          <button @click="deleteBlog(blog.id)">
+      <div v-for="blog of blogs">
+        <div class="title">{{ blog.title }}</div>
+        <p class="description">{{ blog.description }}</p>
+        <span class="date">{{ blog.createTime }}</span>
+        <span class="operations">
+          <el-button @click="deleteBlog(blog.id)" size="mini">
             删除
-          </button>
-        </el-timeline-item>
-      </el-timeline>
+          </el-button>
+        </span>
+
+        <el-divider></el-divider>
+      </div>
 
       <el-pagination class="block-page"
                      background
@@ -35,7 +47,7 @@
 </template>
 
 <script>
-import Header from "../components/Header";
+import Header from "../../components/Header";
 
 export default {
   name: "Blogs.vue",
@@ -87,8 +99,33 @@ export default {
 </script>
 
 <style scoped>
-.block-page {
-  margin: 0 auto;
-  text-align: center;
+.article-list {
+  padding-left: 36px;
+  text-align: left;
 }
+
+.title {
+  font-size: 18px;
+}
+
+.description {
+  font-size: 14px;
+  /*只显示两行*/
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.date {
+  font-size: 14px;
+  color: #5f6471;
+}
+
+.operations {
+  position: absolute;
+  right: 24px;
+  margin: 2px;
+}
+
 </style>
