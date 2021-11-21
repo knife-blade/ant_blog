@@ -24,9 +24,12 @@
         <p class="description">{{ blog.description }}</p>
         <span class="date">{{ blog.createTime }}</span>
         <span class="operations">
-          <el-button @click="deleteBlog(blog.id)" size="mini">
-            编辑
+          <el-button size="mini">
+              <router-link :to="{name: 'BlogEdit', params: {blogId: blog.id}}">
+                编辑
+              </router-link>
           </el-button>
+
           <el-button @click="deleteBlog(blog.id)" size="mini">
             删除
           </el-button>
