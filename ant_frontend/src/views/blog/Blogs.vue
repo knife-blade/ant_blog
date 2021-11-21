@@ -53,7 +53,7 @@
 import Header from "../../components/Header";
 
 export default {
-  name: "Blogs.vue",
+  name: "Blogs",
   components: {Header},
   data() {
     return {
