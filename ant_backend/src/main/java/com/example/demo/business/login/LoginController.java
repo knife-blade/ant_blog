@@ -1,4 +1,4 @@
-package com.example.demo.business.user.controller;
+package com.example.demo.business.login;
 
 import com.example.demo.business.user.entity.User;
 import com.example.demo.business.user.entity.UserVO;
@@ -14,22 +14,23 @@ import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
 
-@Api(tags = "用户")
+@Api(tags = "登录")
 @RestController
-public class UserController {
+@RequestMapping("/login")
+public class LoginController {
     @Autowired
     private UserService userService;
 
     // 默认账号密码：knife 222333
     @ApiOperation("登录")
-    @PostMapping("/login")
+    @PostMapping
     public Result<UserVO> login(@RequestBody User user, HttpServletResponse response) {
         Assert.hasLength(user.getUserName(), "用户名不能为空");
         Assert.hasLength(user.getPassword(), "密码不能为空");
@@ -57,13 +58,5 @@ public class UserController {
         userVO.setEmail(userFromDB.getEmail());
 
         return new Result<UserVO>().success().data(userVO);
-    }
-
-    @ApiOperation("退出登录")
-    @RequiresAuthentication
-    @PostMapping("/logout")
-    public Result logout() {
-        SecurityUtils.getSubject().logout();
-        return new Result();
     }
 }

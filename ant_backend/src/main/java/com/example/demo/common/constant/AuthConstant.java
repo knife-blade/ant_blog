@@ -8,5 +8,5 @@ public interface AuthConstant {
     int HASH_ITERATIONS = 2;
 
     // 鉴权的头名称
-    String AUTHENTICATION_HEADER = "Authorization";
+    String AUTHENTICATION_HEADER = "authorization";
 }
