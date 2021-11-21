@@ -54,7 +54,7 @@ export default {
           this.$axios.post('/login', this.ruleForm)
               .then(res => {
                 console.log(res.data);
-                const jwt = res.headers['Authorization'];
+                const jwt = res.headers['authorization'];
                 const userInfo = res.data.data;
                 // 把数据共享出去
                 _this.$store.commit("SET_TOKEN", jwt);

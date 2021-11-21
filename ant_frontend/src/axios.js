@@ -9,7 +9,7 @@ import store from './store'
 axios.interceptors.request.use(config => {
     // 统一设置请求参数
     if (store.state.token) {
-        config.headers['Authorization'] = store.state.token
+        config.headers['authorization'] = store.state.token
     }
     return config;
 })
