@@ -3,32 +3,30 @@
     <Header></Header>
 
     <div class="article-list">
-      <!--<el-timeline>-->
-      <!--  <el-timeline-item v-for="blog in blogs" :timestamp="blog.createTime" placement="top" :key="blog.id">-->
-      <!--    <el-card>-->
-      <!--      <h4>-->
-      <!--        <router-link :to="{name: 'BlogDetail', params: {blogId: blog.id}}">-->
-      <!--          {{ blog.title }}-->
-      <!--        </router-link>-->
-      <!--      </h4>-->
-      <!--      <p>{{ blog.description }}</p>-->
-      <!--    </el-card>-->
-      <!--    <button @click="deleteBlog(blog.id)">-->
-      <!--      删除-->
-      <!--    </button>-->
-      <!--  </el-timeline-item>-->
-      <!--</el-timeline>-->
+      <div class="article-item-box" v-for="blog of blogs">
+        <h4 class="title" @click="viewBlog(blog.id)">
+          {{ blog.title }}
+        </h4>
 
-      <div v-for="blog of blogs">
-        <div class="title">{{ blog.title }}</div>
+        <!-- <h4 class="title">
+          <router-link :to="{name: 'BlogDetail', params: {blogId: blog.id}}">
+            {{ blog.title }}
+          </router-link>
+        </h4>-->
+
         <p class="description">{{ blog.description }}</p>
         <span class="date">{{ blog.createTime }}</span>
+
         <span class="operations">
-          <el-button size="mini">
-              <router-link :to="{name: 'BlogEdit', params: {blogId: blog.id}}">
-                编辑
-              </router-link>
+          <el-button @click="editBlog(blog.id)" size="mini">
+            编辑
           </el-button>
+
+          <!-- <el-button size="mini">
+            <router-link :to="{name: 'BlogEdit', params: {blogId: blog.id}}">&ndash;&gt;
+               编辑
+            </router-link>
+          </el-button>-->
 
           <el-button @click="deleteBlog(blog.id)" size="mini">
             删除
@@ -78,6 +76,14 @@ export default {
       })
     },
 
+    viewBlog(blogId) {
+      this.$router.push({name: "BlogDetail", params: {blogId: blogId}})
+    },
+
+    editBlog(blogId) {
+      this.$router.push({name: "BlogEdit", params: {blogId: blogId}})
+    },
+
     deleteBlog(blogId) {
       const _this = this
       this.$axios.post("/blog/delete?ids=" + blogId,
@@ -92,7 +98,6 @@ export default {
           confirmButtonText: '确定',
           callback: action => {
             _this.$router.push("/blogs")
-            _this.$router.push()
           }
         });
       })
@@ -106,13 +111,17 @@ export default {
 </script>
 
 <style scoped>
+.article-item-box:hover{
+  background-color: rgb(245,245,250);
+}
+
 .article-list {
   padding-left: 36px;
   text-align: left;
 }
 
 .title {
-  font-size: 18px;
+  cursor: pointer;
 }
 
 .description {
