@@ -33,7 +33,8 @@
           </el-button>
         </span>
 
-        <el-divider></el-divider>
+        <el-divider class="divider">
+        </el-divider>
       </div>
 
       <el-pagination class="block-page"
@@ -142,6 +143,10 @@ export default {
   position: absolute;
   right: 24px;
   margin: 2px;
+}
+
+.divider {
+  margin: 24px 0 0 0;
 }
 
 </style>
