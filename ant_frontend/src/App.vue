@@ -29,4 +29,16 @@
 #nav a.router-link-exact-active {
   color: #42b983;
 }
+
+body, h1, h2, h3, h4, h5, h6, ul, li, ol, dl, dt, dd,
+p, span, div, object, iframe, pre, a, abbr, cite,
+input, button, select, option {
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+
 </style>

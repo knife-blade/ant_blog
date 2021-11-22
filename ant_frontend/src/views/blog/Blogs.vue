@@ -4,9 +4,9 @@
 
     <div class="article-list">
       <div class="article-item-box" v-for="blog of blogs">
-        <h4 class="title" @click="viewBlog(blog.id)">
+        <h3 class="title" @click="viewBlog(blog.id)">
           {{ blog.title }}
-        </h4>
+        </h3>
 
         <!-- <h4 class="title">
           <router-link :to="{name: 'BlogDetail', params: {blogId: blog.id}}">
@@ -32,9 +32,6 @@
             删除
           </el-button>
         </span>
-
-        <el-divider class="divider">
-        </el-divider>
       </div>
 
       <el-pagination class="block-page"
@@ -117,8 +114,16 @@ export default {
 }
 
 .article-list {
-  padding-left: 36px;
   text-align: left;
+}
+
+.article-list .article-item-box{
+  padding: 16px 24px 13px 24px;
+  border-bottom: 1px solid rgb(126, 150, 130);
+}
+
+.article-list .article-item-box p.description {
+  margin: 8px 0 6px 0;
 }
 
 .title {
