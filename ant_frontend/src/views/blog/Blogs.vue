@@ -34,15 +34,16 @@
         </span>
       </div>
 
-      <el-pagination class="block-page"
-                     background
-                     layout="prev, pager, next"
-                     :current-page="current"
-                     :page-size="size"
-                     :total="total"
-                     @current-change=page>
-      </el-pagination>
-
+      <div class="page-block">
+        <el-pagination
+            class="page-container"
+            layout="total, prev, pager, next, jumper"
+            :current-page="current"
+            :page-size="size"
+            :total="total"
+            @current-change=page>
+        </el-pagination>
+      </div>
     </div>
 
   </div>
@@ -109,15 +110,15 @@ export default {
 </script>
 
 <style scoped>
-.article-item-box:hover{
-  background-color: rgb(245,245,250);
+.article-item-box:hover {
+  background-color: rgb(245, 245, 250);
 }
 
 .article-list {
   text-align: left;
 }
 
-.article-list .article-item-box{
+.article-list .article-item-box {
   padding: 16px 24px 13px 24px;
   border-bottom: 1px solid rgb(126, 150, 130);
 }
@@ -153,5 +154,15 @@ export default {
 .divider {
   margin: 24px 0 0 0;
 }
+
+.page-block {
+  padding: 20px 0;
+}
+
+.page-container {
+  width: 100px;
+  margin: auto;
+}
+
 
 </style>

@@ -2,6 +2,7 @@ import axios from 'axios'
 import Element from 'element-ui'
 import router from './router'
 import store from './store'
+import Auth from "@/common/Auth";
 
 // axios.defaults.baseURL = "http://localhost:8081"
 
@@ -9,7 +10,7 @@ import store from './store'
 axios.interceptors.request.use(config => {
     // 统一设置请求参数
     if (store.state.token) {
-        config.headers['authorization'] = store.state.token
+        config.headers[Auth.HEADER_NAME] = store.state.token
     }
     return config;
 })

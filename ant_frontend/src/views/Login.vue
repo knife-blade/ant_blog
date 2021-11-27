@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import Auth from "@/common/Auth";
 export default {
   name: "Login",
   data() {
@@ -54,7 +55,7 @@ export default {
           this.$axios.post('/login', this.ruleForm)
               .then(res => {
                 console.log(res.data);
-                const jwt = res.headers['authorization'];
+                const jwt = res.headers[Auth.HEADER_NAME];
                 const userInfo = res.data.data;
                 // 把数据共享出去
                 _this.$store.commit("SET_TOKEN", jwt);
