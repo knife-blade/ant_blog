@@ -1,22 +1,35 @@
 <template>
-  <div class="m-content">
-    <h3>欢迎来到蚂蚁博客</h3>
-    <div class="block">
-      <el-avatar :size="50" :src="user.avatarUrl"></el-avatar>
-      <div>{{ user.userName }}</div>
+  <div class="header-outside">
+    <div class="header-container">
+      <span class="container-right">
+        <span class="website-name" @click="mainPage()">
+          蚂蚁博客
+        </span>
+      </span>
+
+      <span class="container-middle">
+
+      </span>
+
+      <span class="container-right">
+          <span>
+            <el-avatar :size="50" :src="user.avatarUrl"></el-avatar>
+            <!--<span>{{ user.userName }}</span>-->
+          </span>
+        <!-- 不能这样写。这样写在配置了跨域时有问题，会直接请求后端
+          <span><el-link href="/blogs">主页</el-link></span> -->
+        <router-link to="/blogs">主页</router-link>
+        <el-divider direction="vertical"></el-divider>
+        <router-link to="/blog/add">写博客</router-link>
+        <el-divider direction="vertical"></el-divider>
+        <router-link v-show="!hasLogin" to="/login">登录</router-link>
+        <span v-show="hasLogin"><el-link type="danger" @click="logout">退出</el-link></span>
+      </span>
     </div>
 
-    <div class="maction">
-      <!-- 不能这样写。这样写在配置了跨域时有问题，会直接请求后端
-        <span><el-link href="/blogs">主页</el-link></span> -->
-      <router-link to="/blogs">主页</router-link>
-      <el-divider direction="vertical"></el-divider>
-      <router-link to="/blog/add">写博客</router-link>
-      <el-divider direction="vertical"></el-divider>
-      <router-link v-show="!hasLogin" to="/login">登录</router-link>
 
-      <span v-show="hasLogin"><el-link type="danger" @click="logout">退出</el-link></span>
-    </div>
+
+
 
   </div>
 </template>
@@ -43,8 +56,11 @@ export default {
           .post("/logout")
           .then(res => {
             _this.$store.commit("REMOVE_INFO")
-            _this.$router.push("/login")
+            _this.$router.push({name: "Login"})
           })
+    },
+    mainPage() {
+      this.$router.push({name: "Blogs"});
     }
   },
   created() {
@@ -59,13 +75,12 @@ export default {
 </script>
 
 <style scoped>
-.m-content {
-  max-width: 960px;
-  margin: 0 auto;
-  text-align: center;
+.website-name {
+  cursor: pointer;
 }
 
-.maction {
-  margin: 10px 0;
+.header-outside {
+  margin: 0 auto;
 }
+
 </style>
