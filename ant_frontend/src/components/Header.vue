@@ -1,23 +1,22 @@
 <template>
-  <div class="header-outside">
-    <div class="header-container">
-      <span class="container-right">
+  <div class="header-container">
+      <span class="left">
         <span class="website-name" @click="mainPage()">
           蚂蚁博客
         </span>
       </span>
 
-      <span class="container-middle">
+    <span class="middle">
+        搜索功能，敬请期待
+    </span>
 
-      </span>
-
-      <span class="container-right">
-          <span>
-            <el-avatar :size="50" :src="user.avatarUrl"></el-avatar>
-            <!--<span>{{ user.userName }}</span>-->
-          </span>
-        <!-- 不能这样写。这样写在配置了跨域时有问题，会直接请求后端
-          <span><el-link href="/blogs">主页</el-link></span> -->
+    <span class="right">
+        <span>
+          <el-avatar class="avatar" :size="35" :src="user.avatarUrl"></el-avatar>
+          <!--<span>{{ user.userName }}</span>-->
+        </span>
+      <!-- 不能这样写。这样写在配置了跨域时有问题，会直接请求后端
+        <span><el-link href="/blogs">主页</el-link></span> -->
         <router-link to="/blogs">主页</router-link>
         <el-divider direction="vertical"></el-divider>
         <router-link to="/blog/add">写博客</router-link>
@@ -25,12 +24,6 @@
         <router-link v-show="!hasLogin" to="/login">登录</router-link>
         <span v-show="hasLogin"><el-link type="danger" @click="logout">退出</el-link></span>
       </span>
-    </div>
-
-
-
-
-
   </div>
 </template>
 
@@ -79,8 +72,30 @@ export default {
   cursor: pointer;
 }
 
-.header-outside {
-  margin: 0 auto;
+.header-container {
+  display: flex;
+  height: 48px;
+  /*margin: 5px;*/
+  border-bottom: 2px solid rgb(126, 150, 130);
+}
+
+.left {
+  width: 400px;
+  margin: 0 0 0 10px;
+  font-size: 24px;
+  font-weight: bolder;
+}
+
+.middle {
+  flex: 1;
+}
+
+.right {
+  width: 250px;
+}
+
+.avatar {
+  margin: 4px 20px 0 0;
 }
 
 </style>
