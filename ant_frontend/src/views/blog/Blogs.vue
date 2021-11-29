@@ -1,7 +1,5 @@
 <template>
   <div class="blog-container">
-    <Header></Header>
-
     <div class="article-list">
       <div class="article-item-box" v-for="blog of blogs">
         <h3 class="title" @click="viewBlog(blog.id)">
@@ -50,11 +48,12 @@
 </template>
 
 <script>
-import Header from "../../components/Header";
+import TopHeader from "../../components/TopHeader";
+import LeftAside from "@/components/LeftAside";
 
 export default {
   name: "Blogs",
-  components: {Header},
+  components: {LeftAside, TopHeader},
   data() {
     return {
       blogs: {},
@@ -163,6 +162,5 @@ export default {
   width: 100px;
   margin: auto;
 }
-
 
 </style>
