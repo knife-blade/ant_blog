@@ -10,3 +10,4 @@ public class UserVO {
     private String avatarUrl;
     private String email;
 }
+

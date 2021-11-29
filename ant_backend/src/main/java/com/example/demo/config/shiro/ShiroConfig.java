@@ -27,6 +27,7 @@ public class ShiroConfig {
         chainDefinition.addPathDefinition("/login", "anon");
         chainDefinition.addPathDefinition("/blog/page", "anon");
         chainDefinition.addPathDefinition("/blog/getThis", "anon");
+        chainDefinition.addPathDefinition("/user/page", "anon");
 
         WhiteList.ALL.forEach(str -> {
             chainDefinition.addPathDefinition(str, "anon");
