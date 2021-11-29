@@ -1,7 +1,7 @@
 <template>
   <div class="header-container">
       <span class="left">
-        <span class="website-name" @click="mainPage()">
+        <span class="website-name" @click="home()">
           蚂蚁博客
         </span>
       </span>
@@ -22,7 +22,9 @@
         <router-link to="/blog/add">写博客</router-link>
         <el-divider direction="vertical"></el-divider>
         <router-link v-show="!hasLogin" to="/login">登录</router-link>
-        <span v-show="hasLogin"><el-link type="danger" @click="logout">退出</el-link></span>
+        <span v-show="hasLogin">
+          <el-link type="danger" @click="logout">退出</el-link>
+        </span>
       </span>
   </div>
 </template>
@@ -48,12 +50,13 @@ export default {
       _this.$axios
           .post("/logout")
           .then(res => {
+            // _this.hasLogin = false
             _this.$store.commit("REMOVE_INFO")
-            _this.$router.push({name: "Login"})
+            _this.$router.push({name: "Home"})
           })
     },
-    mainPage() {
-      this.$router.push({name: "Blogs"});
+    home() {
+      this.$router.push({name: "Home"});
     }
   },
   created() {
@@ -61,7 +64,7 @@ export default {
         && this.$store.getters.getUser.userName !== null) {
       this.user.userName = this.$store.getters.getUser.userName
       this.user.avatarUrl = this.$store.getters.getUser.avatarUrl
-      this.hasLogin = true
+      this.hasLogin = this.$store.getters.getHasLogin
     }
   }
 }

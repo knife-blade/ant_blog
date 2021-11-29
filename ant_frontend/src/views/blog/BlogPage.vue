@@ -65,13 +65,15 @@ export default {
   methods: {
     page(currentPage) {
       const _this = this
-      _this.$axios.get("/blog/page?current=" + currentPage).then(res => {
-        console.log(res)
-        _this.blogs = res.data.data.records
-        _this.current = res.data.data.current
-        _this.total = res.data.data.total
-        _this.size = res.data.data.size
-      })
+      _this.$axios
+          .get("/blog/page?current=" + currentPage)
+          .then(res => {
+            console.log(res)
+            _this.blogs = res.data.data.records
+            _this.current = res.data.data.current
+            _this.total = res.data.data.total
+            _this.size = res.data.data.size
+          })
     },
 
     viewBlog(blogId) {
@@ -84,21 +86,22 @@ export default {
 
     deleteBlog(blogId) {
       const _this = this
-      this.$axios.post("/blog/delete?ids=" + blogId,
-          {}, {
-            headers: {
-              "token": localStorage.getItem("token")
-            }
-          }
-      ).then(res => {
-        console.log(res)
-        _this.$alert('操作成功', '提示', {
-          confirmButtonText: '确定',
-          callback: action => {
-            _this.$router.push("/blogs")
-          }
-        });
-      })
+      this.$axios
+          .post("/blog/delete?ids=" + blogId,
+              {}, {
+                headers: {
+                  "token": localStorage.getItem("token")
+                }
+              })
+          .then(res => {
+            console.log(res)
+            _this.$alert('操作成功', '提示', {
+              confirmButtonText: '确定',
+              callback: action => {
+                _this.$router.push("/blogs")
+              }
+            });
+          })
     }
   },
 

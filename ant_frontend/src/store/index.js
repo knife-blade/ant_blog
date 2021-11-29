@@ -6,7 +6,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
         token: '',
-        userInfo: JSON.parse(sessionStorage.getItem("userInfo"))
+        userInfo: JSON.parse(sessionStorage.getItem("userInfo")),
     },
     mutations: {
         // set
@@ -24,15 +24,16 @@ export default new Vuex.Store({
             localStorage.setItem("token", '')
             sessionStorage.setItem("userInfo", JSON.stringify(''))
         }
-
     },
     getters: {
         // get
         getUser: state => {
             console.log("getUser:" + JSON.stringify(state));
             return state.userInfo
+        },
+        getHasLogin: state => {
+            return state.token !== ''
         }
-
     },
     actions: {},
     modules: {}

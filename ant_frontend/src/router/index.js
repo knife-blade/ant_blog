@@ -3,18 +3,21 @@ import VueRouter from 'vue-router'
 import Login from '../views/Login.vue'
 import BlogDetail from '../views/blog/BlogDetail.vue'
 import BlogEdit from '../views/blog/BlogEdit.vue'
-import Blogs from "@/views/blog/Blogs";
-import Home from "@/views/user/Home";
+import Home from "@/views/home/Home";
 
 Vue.use(VueRouter)
 
 const routes = [
-  {
+/*  {
     path: '/',
     name: 'Index',
     redirect: { name: 'Home' }
-  },
+  }, */
   {
+    path: '/',
+    name: 'Home',
+    component: Home
+  }, {
     path: '/login',
     name: 'Login',
     component: Login,
@@ -23,10 +26,10 @@ const routes = [
     }
   },
   {
-    path: '/home',
-    name: 'Home',
+    path: '/:userName',
+    name: 'UserHome',
     // 懒加载
-    component: () => import('../views/user/Home'),
+    component: () => import('../views/user/UserHome'),
     meta: {
       notRequireAuth: true
     }

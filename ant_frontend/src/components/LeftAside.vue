@@ -1,6 +1,6 @@
 <template>
   <div class="left-aside-container">
-    这是左侧边栏
+    这是侧边栏。（后期通过传参来填充）
   </div>
 </template>
 
@@ -15,6 +15,7 @@ export default {
 .left-aside-container {
   width: 300px;
   margin: 0 10px 0 10px;
+  border-right: 2px solid rgb(126, 150, 130);
 }
 
 </style>

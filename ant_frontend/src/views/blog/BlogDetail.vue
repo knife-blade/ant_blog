@@ -29,25 +29,28 @@ export default {
       blog: {
         id: "",
         title: "",
-        content: ""
+        content: "",
+        userId: ""
       },
       ownBlog: false
     }
   },
   created() {
     const blogId = this.$route.params.blogId
-    console.log(blogId)
+    // console.log(blogId)
     const _this = this
-    this.$axios.get('/blog/getThis?id=' + blogId).then(res => {
-      const blog = res.data.data
-      _this.blog.id = blog.id
-      _this.blog.title = blog.title
-      let MardownIt = require("markdown-it")
-      let md = new MardownIt()
-      let result = md.render(blog.content)
-      _this.blog.content = result
-      _this.ownBlog = (blog.userId === _this.$store.getters.getUser.id)
-    })
+    this.$axios
+        .get('/blog/getThis?id=' + blogId)
+        .then(res => {
+          const blog = res.data.data
+          _this.blog.id = blog.id
+          _this.blog.title = blog.title
+          let MarkDownIt = require("markdown-it")
+          let md = new MarkDownIt()
+          let result = md.render(blog.content)
+          _this.blog.content = result
+          _this.ownBlog = (blog.userId === _this.$store.getters.getUser.id)
+        })
   }
 }
 </script>
