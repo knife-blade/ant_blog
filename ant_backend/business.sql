@@ -13,10 +13,10 @@ CREATE TABLE `t_blog`
     `title`        VARCHAR(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
     `description`  VARCHAR(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '摘要',
     `content`      LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL,
-    `status`       INT(0) NOT NULL DEFAULT 0,  -- 0：正常。 1：正在审核。2：已删除,
+    `status`       INT(0) NOT NULL DEFAULT 0 COMMENT '0：正常。 1：正在审核。2：已删除',
     `create_time`  DATETIME(0),
     `update_time`  DATETIME(0),
-    `deleted_flag` BIGINT(0) NOT NULL DEFAULT 0, -- 0：未删除 其他：已删除
+    `deleted_flag` BIGINT(0) NOT NULL DEFAULT 0 COMMENT '0：未删除 其他：已删除',
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -29,7 +29,7 @@ CREATE TABLE `t_user`
     `email`           VARCHAR(64),
     `password`        VARCHAR(64),
     `salt`            VARCHAR(64),
-    `status`          INT(0) NOT NULL DEFAULT 0, -- 0：正常 1：被锁定
+    `status`          INT(0) NOT NULL DEFAULT 0 COMMANT '0：正常 1：被锁定',
     `last_login_time` DATETIME(0),
     `create_time`     DATETIME(0),
     `update_time`     DATETIME(0),
