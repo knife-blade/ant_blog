@@ -1,5 +1,5 @@
 <template>
-  <div class="home-page-container">
+  <div class="user-home-container">
     <top-header></top-header>
     <div class="main-container">
       <left-aside class="left"></left-aside>
@@ -19,10 +19,10 @@ export default {
 </script>
 
 <style scoped>
+
 .main-container {
   display: flex;
-  margin: 10px 0 0 0;
-  border-top: 2px solid rgb(126, 150, 130);
+  margin: 0 50px 0 50px;
 }
 
 .middle {

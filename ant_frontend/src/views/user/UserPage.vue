@@ -1,5 +1,5 @@
 <template>
-  <div class="user-container">
+  <div class="user-page-container">
     <div class="user-list">
       <div class="user-item-box"
            v-for="user of users" @click="toUserHome(user.userName)">
@@ -45,12 +45,22 @@ export default {
 </script>
 
 <style scoped>
-.nick-name {
-  margin: 0 20px 5px 20px;
+
+.user-page-container {
+  margin: 0 50px 0 10px;
+  background-color: white;
+}
+
+.avatar, .nick-name {
+  margin: 0 20px 5px 5px;
 }
 
 .user-item-box {
   cursor: pointer;
+}
+
+.user-item-box:hover {
+  background-color: rgb(245, 245, 250);
 }
 
 </style>

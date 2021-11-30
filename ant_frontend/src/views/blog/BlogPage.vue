@@ -1,7 +1,7 @@
 <template>
-  <div class="blog-container">
-    <div class="article-list">
-      <div class="article-item-box" v-for="blog of blogs">
+  <div class="blog-page-container">
+    <div class="blog-list">
+      <div class="blog-item-box" v-for="blog of blogs">
         <h3 class="title" @click="viewBlog(blog.id)">
           {{ blog.title }}
         </h3>
@@ -112,20 +112,27 @@ export default {
 </script>
 
 <style scoped>
-.article-item-box:hover {
+
+.blog-page-container {
+  margin: 0 50px 0 10px;
+  background-color: white;
+}
+
+.blog-item-box:hover {
   background-color: rgb(245, 245, 250);
 }
 
-.article-list {
+.blog-list {
   text-align: left;
 }
 
-.article-list .article-item-box {
+.blog-list .blog-item-box {
   padding: 16px 24px 13px 24px;
   border-bottom: 1px solid rgb(126, 150, 130);
+  position: relative;
 }
 
-.article-list .article-item-box p.description {
+.blog-list .blog-item-box p.description {
   margin: 8px 0 6px 0;
 }
 
@@ -151,10 +158,6 @@ export default {
   position: absolute;
   right: 24px;
   margin: 2px;
-}
-
-.divider {
-  margin: 24px 0 0 0;
 }
 
 .page-block {

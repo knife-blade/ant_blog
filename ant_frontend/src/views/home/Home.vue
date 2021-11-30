@@ -26,6 +26,7 @@ export default {
 
 .main-container {
   display: flex;
+  margin: 0 50px 0 50px;
 }
 
 .middle {

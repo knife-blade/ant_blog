@@ -14,8 +14,8 @@ export default {
 
 .left-aside-container {
   width: 300px;
-  margin: 0 10px 0 10px;
-  border-right: 2px solid rgb(126, 150, 130);
+  margin: 0 10px 0 5px;
+  background-color: white;
 }
 
 </style>

@@ -71,15 +71,16 @@ export default {
 </script>
 
 <style scoped>
-.website-name {
-  cursor: pointer;
-}
-
 .header-container {
   display: flex;
   height: 48px;
-  /*margin: 5px;*/
-  border-bottom: 2px solid rgb(126, 150, 130);
+  margin: 0 0 20px 0;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);
+  background-color: white;
+}
+
+.website-name {
+  cursor: pointer;
 }
 
 .left {
