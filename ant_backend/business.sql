@@ -37,10 +37,15 @@ CREATE TABLE `t_user`
     INDEX             `INDEX_USERNAME`(`user_name`)
 ) ENGINE = InnoDB;
 
--- 账号：knife，密码：222333    密码会加盐，两次md5之后进行保存
+-- 账号：knife，密码：222333   密码会加盐，两次md5之后进行保存
 INSERT INTO `t_user` VALUES (1, 'knife', '刀刃',
-                             'https://z3.ax1x.com/2021/11/21/IOHWn0.png',
+                             'https://i.postimg.cc/T2Cn6r8y/IOHWn0.png',
                              NULL, 'e4b8c8e43f8fabbe08d5aa67d58068ac', 'sCPKiMOoEl2ecPsfFhClcg==', 0, NULL, NULL, NULL);
+
+-- 账号：sky，密码：123456    密码会加盐，两次md5之后进行保存
+INSERT INTO `t_user` VALUES (2, 'sky', '天蓝',
+                             'https://i.postimg.cc/Hn91nMcj/image.jpg',
+                             NULL, '49b3146badc6479f5d6c306994a4a33e', '+SyMx8kT2CnKf6K2l3IH8g==', 0, NULL, NULL, NULL);
 
 INSERT INTO `t_blog` VALUES (1, 1, 'Java中枚举的用法',
                              '本文介绍Java的枚举类的使用，枚举一般用于定义一些常量。枚举类完全单例、线程安全；性能高，常量值地址唯一，可以用==直接对比；不需重新编译引用类。枚举类编译时，没有把常量值编译到代码里，即使常量的值发生变化，也不会影响引用常量的类。',
@@ -99,3 +104,13 @@ INSERT INTO `t_blog` VALUES (14, 1, 'Spring的AOP的原理',
                              '本文介绍Spring的AOP的原理。Spring的AOP是通过动态代理来实现的。',
                              '本文介绍Spring的AOP的原理。Spring的AOP是通过动态代理来实现的。',
                              0, '2021-08-28 20:59:58', '2021-08-28 20:59:58', 0);
+
+
+INSERT INTO `t_blog` VALUES (15, 2, 'Vue-cli的使用',
+                             'Vue-cli是Vue的一个脚手架工具',
+                             'Vue-cli可以用来创建vue项目',
+                             0, '2021-02-23 11:34:36', '2021-02-25 14:33:36', 0);
+INSERT INTO `t_blog` VALUES (16, 2, 'Vuex的用法',
+                             'Vuex是vue用于共享变量的插件',
+                             '一般使用vuex来共享变量',
+                             0, '2021-03-28 23:37:37', '2021-03-28 23:37:37', 0);
