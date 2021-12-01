@@ -3,18 +3,27 @@
     <top-header></top-header>
     <div class="main-container">
       <left-aside class="left"></left-aside>
-      <blogs class="middle"></blogs>
+      <BlogList class="middle" ></BlogList>
     </div>
   </div>
 </template>
 
 <script>
-import Blogs from "@/views/blog/BlogPage";
+import BlogList from "@/views/blog/BlogList";
 import TopHeader from "@/components/TopHeader";
 import LeftAside from "@/components/LeftAside";
+
 export default {
   name: "Home",
-  components: {TopHeader, LeftAside, Blogs}
+  components: {TopHeader, LeftAside, BlogList},
+  data() {
+    return {
+      userName: ""
+    }
+  },
+  created() {
+    this.userName = this.$route.params.userName;
+  }
 }
 </script>
 

@@ -52,8 +52,9 @@ import TopHeader from "../../components/TopHeader";
 import LeftAside from "@/components/LeftAside";
 
 export default {
-  name: "Blogs",
+  name: "BlogList",
   components: {LeftAside, TopHeader},
+  // props: ["userName"],
   data() {
     return {
       blogs: {},
@@ -106,6 +107,8 @@ export default {
   },
 
   created() {
+    const userName = this.$route.params.userName;
+    console.info("用户名为" + userName);
     this.page(1)
   }
 }

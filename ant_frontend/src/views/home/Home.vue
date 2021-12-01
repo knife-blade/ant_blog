@@ -5,7 +5,7 @@
       <left-aside class="left">
         博主列表（后期改为导航）
       </left-aside>
-      <user-page class="middle"></user-page>
+      <user-list class="middle"></user-list>
     </div>
 
   </div>
@@ -14,11 +14,11 @@
 <script>
 import TopHeader from "@/components/TopHeader";
 import LeftAside from "@/components/LeftAside";
-import UserPage from "@/views/user/UserPage";
+import UserList from "@/views/user/UserList";
 
 export default {
   name: "Home",
-  components: {TopHeader, LeftAside, UserPage}
+  components: {TopHeader, LeftAside, UserList}
 }
 </script>
 

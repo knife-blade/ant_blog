@@ -1,8 +1,9 @@
 <template>
-  <div class="user-page-container">
+  <div class="user-list-container">
     <div class="user-list">
       <div class="user-item-box"
-           v-for="user of users" @click="toUserHome(user.userName)">
+           v-for="user of users"
+           @click="toUserHome(user.userName)">
         <el-avatar class="avatar" :size="50" :src="user.avatarUrl"></el-avatar>
         <span class="nick-name">{{user.nickName}}</span>
       </div>
@@ -12,7 +13,7 @@
 
 <script>
 export default {
-  name: "UserPage",
+  name: "UserList",
   data() {
     return {
       users: {},
@@ -33,8 +34,8 @@ export default {
             _this.size = res.data.data.size
           })
     },
-    toUserHome() {
-      this.$router.push({name: "UserHome"})
+    toUserHome(userName) {
+      this.$router.push({name: "UserHome", params: userName})
     }
   },
   created() {
@@ -46,17 +47,23 @@ export default {
 
 <style scoped>
 
-.user-page-container {
+.user-list-container {
   margin: 0 50px 0 10px;
   background-color: white;
 }
 
-.avatar, .nick-name {
+.avatar {
+  margin: 0 20px 5px 5px;
+}
+
+.nick-name {
   margin: 0 20px 5px 5px;
 }
 
 .user-item-box {
   cursor: pointer;
+  border-bottom: #7e8790 solid 1px;
+  padding: 3px 0 3px 0;
 }
 
 .user-item-box:hover {
