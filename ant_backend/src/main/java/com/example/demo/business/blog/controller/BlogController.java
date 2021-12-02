@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 
@@ -66,7 +67,7 @@ public class BlogController {
 
     @ApiOperation("博客分页")
     @GetMapping("/page")
-    public Result<IPage<Blog>> list(Page<Blog> page) {
+    public Result<IPage<Blog>> list(Page<Blog> page, @RequestParam @NotBlank String userName) {
         IPage<Blog> pageData = blogService.lambdaQuery()
                 .orderByDesc(Blog::getCreateTime)
                 .page(page);
