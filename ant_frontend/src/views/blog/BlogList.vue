@@ -54,7 +54,6 @@ import LeftAside from "@/components/LeftAside";
 export default {
   name: "BlogList",
   components: {LeftAside, TopHeader},
-  // props: ["userName"],
   data() {
     return {
       blogs: {},
@@ -64,10 +63,10 @@ export default {
     }
   },
   methods: {
-    page(currentPage) {
+    page(currentPage, size, userName) {
       const _this = this
       _this.$axios
-          .get("/blog/page?current=" + currentPage)
+          .get("/blog/page?current=" + currentPage + "&size=" + size + "&userName=" + userName)
           .then(res => {
             console.log(res)
             _this.blogs = res.data.data.records
@@ -108,8 +107,7 @@ export default {
 
   created() {
     const userName = this.$route.params.userName;
-    console.info("用户名为" + userName);
-    this.page(1)
+    this.page(1, 10, userName);
   }
 }
 </script>

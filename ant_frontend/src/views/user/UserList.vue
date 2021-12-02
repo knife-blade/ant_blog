@@ -5,7 +5,7 @@
            v-for="user of users"
            @click="toUserHome(user.userName)">
         <el-avatar class="avatar" :size="50" :src="user.avatarUrl"></el-avatar>
-        <span class="nick-name">{{user.nickName}}</span>
+        <div class="nick-name">{{user.nickName}}</div>
       </div>
     </div>
   </div>
@@ -35,7 +35,7 @@ export default {
           })
     },
     toUserHome(userName) {
-      this.$router.push({name: "UserHome", params: userName})
+      this.$router.push({name: "UserHome", params: {userName: userName}})
     }
   },
   created() {
@@ -52,22 +52,23 @@ export default {
   background-color: white;
 }
 
+.user-item-box {
+  cursor: pointer;
+  border-bottom: #7e8790 solid 1px;
+  padding: 3px 0 3px 0;
+  display: flex;
+}
+
+.user-item-box:hover {
+  background-color: rgb(245, 245, 250);
+}
+
 .avatar {
   margin: 0 20px 5px 5px;
 }
 
 .nick-name {
-  margin: 0 20px 5px 5px;
-}
-
-.user-item-box {
-  cursor: pointer;
-  border-bottom: #7e8790 solid 1px;
-  padding: 3px 0 3px 0;
-}
-
-.user-item-box:hover {
-  background-color: rgb(245, 245, 250);
+  margin: auto 10px;
 }
 
 </style>
