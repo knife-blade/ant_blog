@@ -69,6 +69,7 @@ public class BlogController {
     @GetMapping("/page")
     public Result<IPage<Blog>> list(Page<Blog> page, @RequestParam @NotBlank String userName) {
         IPage<Blog> pageData = blogService.lambdaQuery()
+                .eq(Blog::getUserName, userName)
                 .orderByDesc(Blog::getCreateTime)
                 .page(page);
 

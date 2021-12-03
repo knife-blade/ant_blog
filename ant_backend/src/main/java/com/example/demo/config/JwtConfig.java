@@ -1,6 +1,6 @@
 package com.example.demo.config;
 
-import com.example.demo.config.properties.JwtProperties;
+import com.example.demo.config.properties.JwtProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,8 +9,8 @@ import org.springframework.context.annotation.Configuration;
 public class JwtConfig {
     @Bean
     @ConfigurationProperties(prefix = "custom.jwt")
-    public JwtProperties jwtProperties() {
-        return new JwtProperties();
+    public JwtProperty jwtProperty() {
+        return new JwtProperty();
     }
 
 }

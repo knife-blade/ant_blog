@@ -26,3 +26,6 @@ custom:
     secret: f4e2e52034348f86b67cde581c0f9eb5
     # token有效时长，7天。单位：秒
     expire: 604800
+
+  user:
+    defaultAvatarUrl: https://i.postimg.cc/m2wGXNXk/image.png

@@ -7,22 +7,22 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.auth0.jwt.interfaces.JWTVerifier;
 import com.example.demo.common.util.ApplicationContextHolder;
-import com.example.demo.config.properties.JwtProperties;
+import com.example.demo.config.properties.JwtProperty;
 
 import java.util.Date;
 
 public class JwtUtil {
-    private static final JwtProperties jwtProperties;
+    private static final JwtProperty JWT_PROPERTY;
 
     static {
-        jwtProperties = ApplicationContextHolder.getContext().getBean(JwtProperties.class);
+        JWT_PROPERTY = ApplicationContextHolder.getContext().getBean(JwtProperty.class);
     }
 
     // 创建jwt token
     public static String createToken(String userId) {
         try {
-            Date date = new Date(System.currentTimeMillis() + jwtProperties.getExpire() * 1000);
-            Algorithm algorithm = Algorithm.HMAC512(jwtProperties.getSecret());
+            Date date = new Date(System.currentTimeMillis() + JWT_PROPERTY.getExpire() * 1000);
+            Algorithm algorithm = Algorithm.HMAC512(JWT_PROPERTY.getSecret());
             return JWT.create()
                     // 自定义私有的payload的key-value。比如：.withClaim("userName", "Tony")
                     // .withClaim("key1", "value1")
@@ -44,7 +44,7 @@ public class JwtUtil {
      * - token超期：{@link com.auth0.jwt.exceptions.TokenExpiredException}
      */
     public static void verifyToken(String token) {
-        Algorithm algorithm = Algorithm.HMAC512(jwtProperties.getSecret());
+        Algorithm algorithm = Algorithm.HMAC512(JWT_PROPERTY.getSecret());
 
         JWTVerifier jwtVerifier = JWT.require(algorithm)
                 // .withIssuer("auth0")
