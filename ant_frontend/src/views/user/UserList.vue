@@ -54,7 +54,7 @@ export default {
 
 .user-item-box {
   cursor: pointer;
-  border-bottom: #7e8790 solid 1px;
+  border-bottom: #c2c7d2 solid 1px;
   padding: 3px 0 3px 0;
   display: flex;
 }
