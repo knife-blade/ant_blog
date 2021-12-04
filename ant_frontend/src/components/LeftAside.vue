@@ -1,6 +1,6 @@
 <template>
   <div class="left-aside-container">
-    这是侧边栏。（后期通过传参来填充）
+    <slot></slot>
   </div>
 </template>
 

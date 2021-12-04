@@ -3,7 +3,9 @@
     <top-header></top-header>
     <div class="main-container">
       <left-aside class="left">
-        博主列表（后期改为导航）
+        <div class="blogger">
+          博主列表
+        </div>
       </left-aside>
       <user-list class="middle"></user-list>
     </div>
@@ -18,7 +20,7 @@ import UserList from "@/views/user/UserList";
 
 export default {
   name: "Home",
-  components: {TopHeader, LeftAside, UserList}
+  components: {TopHeader, LeftAside, UserList},
 }
 </script>
 
@@ -31,6 +33,11 @@ export default {
 
 .middle {
   flex: 1;
+}
+
+.blogger {
+  font-size: 20px;
+  margin: 10px 10px;
 }
 
 </style>
