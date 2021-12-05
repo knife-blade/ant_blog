@@ -3,13 +3,19 @@ package com.example.demo.business.user.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.demo.business.blog.service.BlogService;
 import com.example.demo.business.user.entity.User;
+import com.example.demo.business.user.entity.UserProfile;
 import com.example.demo.business.user.entity.UserVO;
 import com.example.demo.business.user.mapper.UserMapper;
 import com.example.demo.business.user.service.UserService;
 import com.example.demo.common.exception.BusinessException;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
@@ -27,7 +33,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     @Override
-    public UserVO findUser(String userName) {
+    public UserProfile findUser(String userName) {
         if (!StringUtils.hasText(userName)) {
             throw new BusinessException("用户名不能为空");
         }
@@ -42,8 +48,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         UserVO userVO = convertToUserVO(user);
 
         Integer blogCount = blogService.blogCount(user.getId());
-        userVO.setBlogCount(blogCount);
 
-        return userVO;
+        UserProfile userProfile = new UserProfile();
+        BeanUtils.copyProperties(userVO, userProfile);
+
+        userProfile.setBlogCount(blogCount);
+
+        return userProfile;
     }
 }

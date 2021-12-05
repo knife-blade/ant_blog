@@ -3,6 +3,7 @@ package com.example.demo.business.user.controller;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.demo.business.user.entity.User;
+import com.example.demo.business.user.entity.UserProfile;
 import com.example.demo.business.user.entity.UserVO;
 import com.example.demo.business.user.service.UserService;
 import com.example.demo.common.exception.BusinessException;
@@ -43,7 +44,7 @@ public class UserController {
     }
 
     @GetMapping("profile")
-    public UserVO profile(@RequestParam String userName) {
+    public UserProfile profile(@RequestParam String userName) {
         if (!StringUtils.hasText(userName)) {
             throw new BusinessException("用户名不能为空");
         }
