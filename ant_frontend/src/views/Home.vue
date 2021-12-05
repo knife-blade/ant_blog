@@ -37,7 +37,8 @@ export default {
 
 .blogger {
   font-size: 20px;
-  margin: 10px 10px;
+  padding: 10px 10px;
+  background-color: white;
 }
 
 </style>

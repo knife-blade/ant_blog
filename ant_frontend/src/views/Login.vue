@@ -62,7 +62,8 @@ export default {
                 _this.$store.commit("SET_USERINFO", userInfo);
                 // 获取
                 console.log(_this.$store.getters.getUser);
-                _this.$router.push("/blogs");
+                // _this.$router.push("/blogs");
+                _this.$router.push({name: "UserHome", params: {userName: userInfo.userName}})
               })
         } else {
           console.log('error submit!!');

@@ -1,31 +1,37 @@
 <template>
   <div class="header-container">
-      <span class="left">
-        <span class="website-name" @click="home()">
-          蚂蚁博客
-        </span>
+    <div class="left">
+      <span class="website-name" @click="toHome()">
+        蚂蚁博客
       </span>
+    </div>
 
-    <span class="middle">
+    <div class="middle">
+      <span class="search">
         搜索功能，敬请期待
-    </span>
+      </span>
+    </div>
 
-    <span class="right">
-        <span>
-          <el-avatar class="avatar" :size="35" :src="user.avatarUrl"></el-avatar>
-          <!--<span>{{ user.userName }}</span>-->
+    <div class="right">
+        <span v-show="hasLogin">
+          <el-avatar class="avatar"
+                     :size="35"
+                     :src="user.avatarUrl"
+                     @click="toUserHome(user.userName)">
+          </el-avatar>
+          <el-divider direction="vertical"></el-divider>
         </span>
-      <!-- 不能这样写。这样写在配置了跨域时有问题，会直接请求后端
-        <span><el-link href="/blogs">主页</el-link></span> -->
-        <router-link to="/blogs">主页</router-link>
-        <el-divider direction="vertical"></el-divider>
-        <router-link to="/blog/add">写博客</router-link>
-        <el-divider direction="vertical"></el-divider>
+
+        <span v-show="hasLogin">
+          <router-link to="/blog/add">写博客</router-link>
+          <el-divider direction="vertical"></el-divider>
+        </span>
+
         <router-link v-show="!hasLogin" to="/login">登录</router-link>
         <span v-show="hasLogin">
           <el-link type="danger" @click="logout">退出</el-link>
         </span>
-      </span>
+      </div>
   </div>
 </template>
 
@@ -55,8 +61,11 @@ export default {
             _this.$router.push({name: "Home"})
           })
     },
-    home() {
+    toHome() {
       this.$router.push({name: "Home"});
+    },
+    toUserHome(userName) {
+      this.$router.push({name: "UserHome", params: {userName: userName}})
     }
   },
   created() {
@@ -84,17 +93,23 @@ export default {
 }
 
 .left {
-  width: 400px;
-  margin: 0 0 0 10px;
+  /*width: 400px;*/
+  margin: 5px 10px;
   font-size: 24px;
   font-weight: bolder;
 }
 
 .middle {
   flex: 1;
+  display: flex;
+}
+
+.search {
+  margin: 5px auto;
 }
 
 .right {
+  margin: 5px 10px;
   width: 250px;
 }
 
