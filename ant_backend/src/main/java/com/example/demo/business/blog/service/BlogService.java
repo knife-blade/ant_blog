@@ -8,4 +8,6 @@ import java.util.List;
 
 public interface BlogService extends IService<Blog> {
     int deleteBlog(List<Long> blogIds);
+
+    Integer blogCount(Long userId);
 }

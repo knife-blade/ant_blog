@@ -6,12 +6,14 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.demo.business.blog.entity.Blog;
 import com.example.demo.business.blog.service.BlogService;
 import com.example.demo.common.entity.Result;
+import com.example.demo.common.exception.BusinessException;
 import com.example.demo.common.util.auth.ShiroUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotBlank;
@@ -67,7 +69,11 @@ public class BlogController {
 
     @ApiOperation("博客分页")
     @GetMapping("/page")
-    public Result<IPage<Blog>> list(Page<Blog> page, @RequestParam @NotBlank String userName) {
+    public Result<IPage<Blog>> list(Page<Blog> page, @RequestParam String userName) {
+        if (!StringUtils.hasText(userName)) {
+            throw new BusinessException("用户名不能为空");
+        }
+
         IPage<Blog> pageData = blogService.lambdaQuery()
                 .eq(Blog::getUserName, userName)
                 .orderByDesc(Blog::getCreateTime)

@@ -22,4 +22,11 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog> implements Bl
         LambdaQueryChainWrapper<Blog> wrapper = lambdaQuery().in(Blog::getId, ids);
         return this.getBaseMapper().deleteBlog(wrapper);
     }
+
+    @Override
+    public Integer blogCount(Long userId) {
+        return lambdaQuery()
+                .eq(Blog::getUserId, userId)
+                .count();
+    }
 }

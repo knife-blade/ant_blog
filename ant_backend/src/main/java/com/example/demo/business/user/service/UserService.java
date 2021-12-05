@@ -8,4 +8,6 @@ import java.util.List;
 
 public interface UserService extends IService<User> {
     UserVO convertToUserVO(User user);
+
+    UserVO findUser(String userName);
 }

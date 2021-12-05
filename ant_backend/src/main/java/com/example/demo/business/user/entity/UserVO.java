@@ -9,5 +9,7 @@ public class UserVO {
     private String nickName;
     private String avatarUrl;
     private String email;
+
+    private Integer blogCount;
 }
 
