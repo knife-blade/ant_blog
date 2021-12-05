@@ -3,7 +3,7 @@
     <top-header></top-header>
     <div class="main-container">
       <left-aside class="left">
-        <user-profile></user-profile>
+        <user-profile :userName="userName"></user-profile>
       </left-aside>
       <blog-list class="middle" :userName="userName"></blog-list>
     </div>

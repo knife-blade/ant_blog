@@ -15,7 +15,7 @@
         <p class="description">{{ blog.description }}</p>
         <span class="date">{{ blog.createTime }}</span>
 
-        <span class="operations">
+        <span class="operations" v-show="isOwner">
           <el-button @click="editBlog(blog.id)" size="mini">
             编辑
           </el-button>
@@ -59,7 +59,8 @@ export default {
       blogs: {},
       current: 1,
       total: 0,
-      size: 10
+      size: 10,
+      isOwner: false
     }
   },
   methods: {
@@ -107,6 +108,10 @@ export default {
 
   created() {
     const userName = this.$route.params.userName;
+    if (this.$store.getters.getUser != null
+        && userName === this.$store.getters.getUser.userName) {
+      this.isOwner = true;
+    }
     this.page(1, 10, userName);
   }
 }

@@ -19,7 +19,6 @@
                      :src="user.avatarUrl"
                      @click="toUserHome(user.userName)">
           </el-avatar>
-          <el-divider direction="vertical"></el-divider>
         </span>
 
         <span v-show="hasLogin">
@@ -115,6 +114,7 @@ export default {
 
 .avatar {
   margin: 4px 20px 0 0;
+  cursor: pointer;
 }
 
 </style>
