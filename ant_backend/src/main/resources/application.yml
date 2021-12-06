@@ -11,9 +11,9 @@ spring:
     password: 222333
 
 #mybatis-plus配置控制台打印完整带参数SQL语句
-mybatis-plus:
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#mybatis-plus:
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 shiro:
   enabled: true       # 开启 shiro，默认为 true
