@@ -60,14 +60,15 @@ export default {
       current: 1,
       total: 0,
       size: 10,
-      isOwner: false
+      isOwner: false,
+      userName: ''
     }
   },
   methods: {
-    page(currentPage, size, userName) {
+    page(currentPage) {
       const _this = this
       _this.$axios
-          .get("/blog/page?current=" + currentPage + "&size=" + size + "&userName=" + userName)
+          .get("/blog/page?current=" + currentPage + "&size=" + this.size + "&userName=" + this.userName)
           .then(res => {
             console.log(res)
             _this.blogs = res.data.data.records
@@ -107,12 +108,12 @@ export default {
   },
 
   created() {
-    const userName = this.$route.params.userName;
+    this.userName = this.$route.params.userName;
     if (this.$store.getters.getUser != null
-        && userName === this.$store.getters.getUser.userName) {
+        && this.userName === this.$store.getters.getUser.userName) {
       this.isOwner = true;
     }
-    this.page(1, 10, userName);
+    this.page(1);
   }
 }
 </script>
