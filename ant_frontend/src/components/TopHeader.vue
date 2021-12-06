@@ -13,11 +13,11 @@
     </div>
 
     <div class="right">
-        <span v-show="hasLogin">
+        <span v-show="hasLogin"
+              @click="toUserHome(user.userName)">
           <el-avatar class="avatar"
                      :size="35"
-                     :src="user.avatarUrl"
-                     @click="toUserHome(user.userName)">
+                     :src="user.avatarUrl">
           </el-avatar>
         </span>
 
