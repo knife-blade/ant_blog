@@ -19,7 +19,9 @@ CREATE TABLE `t_blog`
     `update_time`  DATETIME(0),
     `deleted_flag` BIGINT(0) NOT NULL DEFAULT 0 COMMENT '0：未删除 其他：已删除',
     PRIMARY KEY (`id`) USING BTREE,
-    INDEX             `INDEX_USERNAME`(`user_name`)
+    KEY `index_user_id`(`user_id`),
+    KEY `index_user_name`(`user_name`),
+    KEY `index_create_time`(`create_time`)
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
 
 CREATE TABLE `t_user`
@@ -36,7 +38,8 @@ CREATE TABLE `t_user`
     `create_time`     DATETIME(0) NOT NULL,
     `update_time`     DATETIME(0) NOT NULL,
     PRIMARY KEY (`id`) USING BTREE,
-    INDEX             `INDEX_USERNAME`(`user_name`)
+    KEY `index_user_name`(`user_name`),
+    KEY `index_create_time`(`create_time`)
 ) ENGINE = InnoDB;
 
 -- 账号：knife，密码：222333   密码会加盐，两次md5之后进行保存
