@@ -11,9 +11,9 @@ CREATE TABLE `t_blog`
     `id`           BIGINT(0) NOT NULL AUTO_INCREMENT,
     `user_id`      BIGINT(0) NOT NULL,
     `user_name`    VARCHAR(64) NOT NULL,
-    `title`        VARCHAR(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-    `description`  VARCHAR(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '摘要',
-    `content`      LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL,
+    `title`        VARCHAR(256) CHARACTER SET utf8mb4 NOT NULL COMMENT '标题',
+    `description`  VARCHAR(256) CHARACTER SET utf8mb4 NOT NULL COMMENT '摘要',
+    `content`      LONGTEXT CHARACTER SET utf8mb4 NOT NULL COMMENT '内容',
     `status`       INT(0) NOT NULL DEFAULT 0 COMMENT '0：正常。 1：正在审核。2：已删除',
     `create_time`  DATETIME(0),
     `update_time`  DATETIME(0),
@@ -22,7 +22,7 @@ CREATE TABLE `t_blog`
     KEY `index_user_id`(`user_id`),
     KEY `index_user_name`(`user_name`),
     KEY `index_create_time`(`create_time`)
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COMMENT = '博客';
 
 CREATE TABLE `t_user`
 (
@@ -40,7 +40,7 @@ CREATE TABLE `t_user`
     PRIMARY KEY (`id`) USING BTREE,
     KEY `index_user_name`(`user_name`),
     KEY `index_create_time`(`create_time`)
-) ENGINE = InnoDB;
+) ENGINE = InnoDB COMMENT = '用户';
 
 -- 账号：knife，密码：222333   密码会加盐，两次md5之后进行保存
 INSERT INTO `t_user` VALUES (1, 'knife', 'e4b8c8e43f8fabbe08d5aa67d58068ac', 'sCPKiMOoEl2ecPsfFhClcg==',
