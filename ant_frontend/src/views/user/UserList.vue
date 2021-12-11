@@ -5,7 +5,7 @@
            v-for="user of users"
            @click="toUserHome(user.userName)">
         <el-avatar class="avatar" :size="50" :src="user.avatarUrl"></el-avatar>
-        <div class="nick-name">{{user.nickName}}</div>
+        <div class="nick-name">{{ user.nickName }}</div>
       </div>
     </div>
   </div>
@@ -26,7 +26,14 @@ export default {
     page(current, size) {
       const _this = this
       this.$axios
-          .get("/user/page?current=" + current + "&size=" + size)
+          .get("/user/page",
+              {
+                params: {
+                  current: current,
+                  size: size
+                }
+              }
+          )
           .then(res => {
             _this.users = res.data.data.records
             _this.current = res.data.data.current

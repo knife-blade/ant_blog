@@ -26,7 +26,7 @@
           <el-divider direction="vertical"></el-divider>
         </span>
 
-        <router-link v-show="!hasLogin" to="/login">登录</router-link>
+        <router-link v-show="!hasLogin" to="/login">登录/注册</router-link>
         <span v-show="hasLogin">
           <el-link type="danger" @click="logout">退出</el-link>
         </span>

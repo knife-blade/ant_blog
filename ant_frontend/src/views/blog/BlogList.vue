@@ -68,7 +68,15 @@ export default {
     page(currentPage) {
       const _this = this
       _this.$axios
-          .get("/blog/page?current=" + currentPage + "&size=" + this.size + "&userName=" + this.userName)
+          .get("/blog/page",
+              {
+                params: {
+                  current: currentPage,
+                  size: this.size,
+                  userName: this.userName
+                }
+              }
+          )
           .then(res => {
             console.log(res)
             _this.blogs = res.data.data.records
