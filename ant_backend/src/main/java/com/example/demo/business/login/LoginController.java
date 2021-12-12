@@ -78,6 +78,7 @@ public class LoginController {
         String calculatedPassword = new SimpleHash(AuthConstant.ALGORITHM_TYPE,
                 password, salt, AuthConstant.HASH_ITERATIONS).toString();
         user.setPassword(calculatedPassword);
+        user.setSalt(salt);
         user.setAvatarUrl(userProperty.getDefaultAvatarUrl());
         userService.save(user);
         return user;
