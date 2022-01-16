@@ -16,9 +16,9 @@ import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.List;
 
 @Api(tags = "博客")
 @RestController
@@ -32,12 +32,12 @@ public class BlogController {
     @RequiresAuthentication
     @PostMapping("/add")
     public Result<Blog> add(@RequestBody Blog blog) {
-        Assert.hasLength(blog.getTitle(), "标题不能为空");
-        Assert.hasLength(blog.getDescription(), "摘要不能为空");
-        Assert.hasLength(blog.getContent(), "内容不能为空");
+        Assert.hasText(blog.getTitle(), "标题不能为空");
+        Assert.hasText(blog.getDescription(), "摘要不能为空");
+        Assert.hasText(blog.getContent(), "内容不能为空");
 
         Blog temp = new Blog();
-        temp.setUserId(Long.parseLong(ShiroUtil.getProfile().getId()));
+        temp.setUserId(Long.parseLong(ShiroUtil.getProfile().getUserId()));
         temp.setUpdateTime(LocalDateTime.now());
         temp.setStatus(0);
 
@@ -51,15 +51,14 @@ public class BlogController {
     @PostMapping("/edit")
     public Result<Blog> edit(@RequestBody Blog blog) {
         Assert.isTrue(blog.getId() != null, "id不能为空");
-        Assert.hasLength(blog.getTitle(), "标题不能为空");
-        Assert.hasLength(blog.getDescription(), "摘要不能为空");
-        Assert.hasLength(blog.getContent(), "内容不能为空");
+        Assert.hasText(blog.getTitle(), "标题不能为空");
+        Assert.hasText(blog.getDescription(), "摘要不能为空");
+        Assert.hasText(blog.getContent(), "内容不能为空");
 
         Blog temp = blogService.getById(blog.getId());
 
         // 只能编辑自己的文章
-        System.out.println(ShiroUtil.getProfile().getId());
-        Assert.isTrue(temp.getUserId().equals(Long.parseLong(ShiroUtil.getProfile().getId())), "没有权限编辑");
+        Assert.isTrue(temp.getUserId().equals(Long.parseLong(ShiroUtil.getProfile().getUserId())), "没有权限编辑");
 
         BeanUtil.copyProperties(blog, temp, "id", "userId", "updateTime", "status");
         blogService.updateById(temp);
@@ -95,6 +94,19 @@ public class BlogController {
     @RequiresAuthentication
     @PostMapping("/delete")
     public Result delete(@RequestParam Long[] ids) {
+        Assert.notNull(ids, "博客id不能为空");
+
+        List<Blog> blogList = blogService.lambdaQuery()
+                .in(Blog::getId, Arrays.asList(ids))
+                .list();
+
+        // 只能删除自己的文章
+        for (Blog blog : blogList) {
+            if (!ShiroUtil.getProfile().getUserId().equals(blog.getUserId().toString())) {
+                throw new BusinessException("您无权删除其他人的文章");
+            }
+        }
+
         blogService.deleteBlog(Arrays.asList(ids));
         return new Result();
     }

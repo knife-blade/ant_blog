@@ -10,6 +10,6 @@ import lombok.Data;
  */
 @Data
 public class AccountProfile {
-    private String id;
+    private String userId;
     private String userName;
 }
