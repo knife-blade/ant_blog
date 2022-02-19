@@ -6,7 +6,7 @@
 整个项目完全从0开始开发。
 
 ## 目录说明
-ant_backend：后端项目
+ant_backend：后端项目  
 ant_frontend：前端项目
 
 ## 功能
