@@ -15,7 +15,7 @@ ant_frontend：前端项目
 #### 技术栈
 前后端分离。后端采用SpringBoot，前端采用Vue。
 
-后端
+### 后端
 
 1. SpringBoot
 2. MyBatis-Plus
@@ -25,8 +25,14 @@ ant_frontend：前端项目
 6. Maven
 
 
-前端
+### 前端
+
 1. Vue
 2. Element-UI
 3. Vuex
 4. webpack
+
+#### 效果展示
+#####首页（博主列表）
+
+
