@@ -21,9 +21,12 @@ ant_frontend：前端项目
 2. MyBatis-Plus
 3. Shiro
 4. JWT
+5. knife4j（swagger的升级版）
+6. Maven
 
 
 前端
 1. Vue
 2. Element-UI
 3. Vuex
+4. webpack
