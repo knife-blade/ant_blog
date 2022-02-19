@@ -27,8 +27,8 @@ ant_frontend：前端项目
 ## 前端
 
 1. Vue
-2. Element-UI
-3. Vuex
+2. Vuex
+3. Element-UI
 4. webpack
 
 # 效果展示
