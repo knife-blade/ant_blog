@@ -1,7 +1,7 @@
 package com.example.demo.business.login;
 
 import com.example.demo.business.user.entity.User;
-import com.example.demo.business.user.entity.UserVO;
+import com.example.demo.business.user.vo.UserVO;
 import com.example.demo.business.user.service.UserService;
 import com.example.demo.common.constant.AuthConstant;
 import com.example.demo.common.entity.Result;

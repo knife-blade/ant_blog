@@ -1,4 +1,4 @@
-package com.example.demo.business.user.entity;
+package com.example.demo.business.user.vo;
 
 import lombok.Data;
 
