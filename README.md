@@ -17,19 +17,23 @@ ant_frontend：前端项目
 
 ## 后端
 
-1. SpringBoot
-2. MyBatis-Plus
-3. Shiro
-4. JWT
-5. knife4j（swagger的升级版）
-6. Maven
+1. SpringBoot（spring-boot-starter-parent:2.4.2）
+2. MyBatis-Plus（mybatis-plus-boot-starter:3.4.3.1）
+3. Shiro（shiro-redis-spring-boot-starter:3.3.1）
+4. JWT（java-jwt:3.18.1）
+5. knife4j（swagger的升级版）（knife4j-spring-boot-starter:3.0.3）
+6. hutool（hutool-all:5.5.7）
+7. lombok（lombok（版本由spring-boot-starter-parent指定））
 
 ## 前端
 
-1. Vue
-2. Vuex
-3. Element-UI
-4. webpack
+1. vue（^2.6.11）
+2. vue-router（^3.2.0）
+3. vuex（^3.4.0）
+4. element-uI（^2.15.0）
+5. github-markdown-css（^4.0.0）
+6. markdown-it（^12.0.4）
+7. mavon-editor（^2.9.1）
 
 # 效果展示
 ## 首页（博主列表）
