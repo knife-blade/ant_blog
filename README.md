@@ -16,8 +16,15 @@
 # 功能
 
 
-- 用户：注册、登录、退出  
-- 博客：浏览、发表、编辑、删除
+- 用户
+  - 注册
+  - 登录
+  - 退出  
+- 博客
+  - 浏览
+  - 发表
+  - 编辑
+  - 删除
 
 
 # 技术栈
@@ -27,13 +34,16 @@
 
 ## 后端
 
+
 1. SpringBoot（spring-boot-starter-parent:2.4.2）
 2. MyBatis-Plus（mybatis-plus-boot-starter:3.4.3.1）
-3. Shiro（shiro-redis-spring-boot-starter:3.3.1）
-4. JWT（java-jwt:3.18.1）
-5. knife4j（swagger的升级版）（knife4j-spring-boot-starter:3.0.3）
-6. hutool（hutool-all:5.5.7）
-7. lombok（lombok（版本由spring-boot-starter-parent指定））
+3. MySQL（8.0.21）
+4. Shiro（shiro-redis-spring-boot-starter:3.3.1）
+5. JWT（java-jwt:3.18.1）
+6. knife4j（swagger的升级版）（knife4j-spring-boot-starter:3.0.3）
+7. hutool（hutool-all:5.5.7）
+8. lombok（lombok（版本由spring-boot-starter-parent指定））
+
 
 ## 前端
 
