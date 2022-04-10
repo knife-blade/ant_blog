@@ -5,16 +5,13 @@ import com.example.demo.common.exception.BusinessException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authz.UnauthenticatedException;
 import org.apache.shiro.authz.UnauthorizedException;
-import org.springframework.core.Ordered;
 import org.springframework.core.annotation.AnnotationUtils;
-import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @Slf4j
-@Order(Ordered.LOWEST_PRECEDENCE - 1)
 @RestControllerAdvice
 public class GlobalExceptionAdvice {
     @ExceptionHandler(Exception.class)
