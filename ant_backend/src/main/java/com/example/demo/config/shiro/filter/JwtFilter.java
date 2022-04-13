@@ -53,7 +53,7 @@ public class JwtFilter extends AuthenticatingFilter {
     }
 
     /**
-     * 这里的token会传给AuthorizingRealm子类（本处是AccountRealm）的doGetAuthenticationInfo方法作为参数
+     * 这里的token会传给AuthorizingRealm子类（本处是AccountRealm）的doGetAuthenticationInfo方法作为参数。
      */
     @Override
     protected AuthenticationToken createToken(ServletRequest servletRequest,
