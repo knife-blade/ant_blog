@@ -1,0 +1,32 @@
+package com.knife.ant.business.blog.service.impl;
+
+import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.knife.ant.business.blog.entity.Blog;
+import com.knife.ant.business.blog.mapper.BlogMapper;
+import com.knife.ant.business.blog.service.BlogService;
+import com.knife.ant.common.exception.BusinessException;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog> implements BlogService {
+
+    @Override
+    public int deleteBlog(List<Long> ids) {
+        if (ids == null || ids.isEmpty()) {
+            throw new BusinessException("博客id不能为空");
+        }
+
+        LambdaQueryChainWrapper<Blog> wrapper = lambdaQuery().in(Blog::getId, ids);
+        return this.getBaseMapper().deleteBlog(wrapper);
+    }
+
+    @Override
+    public Integer blogCount(Long userId) {
+        return lambdaQuery()
+                .eq(Blog::getUserId, userId)
+                .count();
+    }
+}
