@@ -8,7 +8,6 @@ import lombok.EqualsAndHashCode;
 import java.time.LocalDateTime;
 
 @Data
-@EqualsAndHashCode(callSuper = false)
 @TableName("t_blog")
 public class Blog {
     @TableId(value = "id", type = IdType.AUTO)
@@ -35,7 +34,7 @@ public class Blog {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private LocalDateTime updateTime;
 
-    @TableLogic
+    @TableLogic(delval = "id")
     private Long deletedFlag;
 
 }
